@@ -30,3 +30,7 @@
 *.vrb
 *.xdy
 *.tdo
+
+.DS_Store
+
+CavalheiroSAC2014.pdf
