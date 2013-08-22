@@ -210,8 +210,8 @@ architecture and each column a task in the graph $G$ to be scheduled.
  $M(i,j) \longleftarrow null$     \Comment*[r]{For all $0\leq i \leq m, 0\leq j\le n$}
  
  \While{$G \neq \emptyset$}{
-     $V \longleftarrow V \cup G.readyTasks$\Comment*[r]{Read and remove ready...}
-     $G \longleftarrow G - G.readyTasks$  \Comment*[r]{...tasks from $G$}
+     $V \longleftarrow V \cup G.readyTasks$\Comment*[r]{Read and remove...}
+     $G \longleftarrow G - G.readyTasks$  \Comment*[r]{...ready tasks}
      $V.sort$                       \Comment*[r]{Apply a ranking policy}
      $v \longleftarrow V.first$\;
      $p \longleftarrow M.nextIdleProcessor$
