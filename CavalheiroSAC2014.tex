@@ -3,8 +3,8 @@
  \pdfpageheight=11truein
 
 
-%\usepackage{algoritm2e}
-\usepackage[norelsize]{algorithm2e}
+\usepackage{algorithm2e}
+%\usepackage[norelsize]{algorithm2e}
 
 
 \newtheorem{thm}{Theorem}
@@ -154,10 +154,9 @@ final remarks and future work are discussed in \ref{sec:conclusion}.
 A large number of scheduling heuristics algorithms are based on list
 scheduling strategy [este, 2, 3, 4, 7]. Consequently, we found many
 runtime systems employing dynamic list scheduling techniques at
-runtime. In this section we briefly present this strategy and we
-discuss the concepts of task and thread in the context os this work.
-Then we present requirements of data structures to support scheduling
-operations and the employ of list on Cilk, Kaapi and TBB.
+runtime. In this section we briefly present this strategy and 
+data structures required to support the scheduling
+operations. We also present the employ of list on Cilk, Kaapi and TBB.
 
 %-------------------------------------------------------------
 \subsection{Dynamic list scheduling}\label{ssec:dls}
@@ -211,13 +210,13 @@ architecture and each column a task in the graph $G$ to be scheduled.
  $M(i,j) \longleftarrow null$     \Comment*[r]{For all $0\leq i \leq m, 0\leq j\le n$}
  
  \While{$G \neq \emptyset$}{
-     $V \longleftarrow V \cup G.readyTasks$   \Comment*[r]{Get the ready tasks and...}
-     $G \longleftarrow G - G.readyTasks$  \Comment*[r]{... remove them from $G$}
+     $V \longleftarrow V \cup G.readyTasks$   \Comment*[r]{Read and remove ready...}
+     $G \longleftarrow G - G.readyTasks$  \Comment*[r]{...tasks from $G$}
      $V.sort$                       \Comment*[r]{Apply a ranking policy}
      $v \longleftarrow V.first$\;
-     $p \longleftarrow M.nextIdleProcessor$ \Comment*[r]{Choose next available processor}
-     $M(p,v) \longleftarrow dataStart(v)$  \Comment*[f]{Maps the task and sets all ...}
-  {$~$}~\Comment*[f]{... $succ(v)$ as ready}
+     $p \longleftarrow M.nextIdleProcessor$
+     $M(p,v) \longleftarrow dataStart(v)$\Comment*[f]{Maps the task and...}
+  {$~$}~\Comment*[f]{...sets all $succ(v)$ as ready}
 }
 \caption{A general Dynamic List Algorithm scheduling algorithm.}
 \end{algorithm}
