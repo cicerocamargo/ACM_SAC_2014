@@ -221,11 +221,20 @@ architecture and each column a task in the graph $G$ to be scheduled.
 \caption{A general Dynamic List Algorithm scheduling algorithm.}
 \end{algorithm}
 
-\subsection{Work stealing technique}
+\subsection{Work stealing}
   
 Work stealing has proven \cite{blelloch} to be an effective method for scheduling parallel programs on multiprocessors. One of the reasons is that this approach limits the number of scheduling operations involving more than one processor to the situation were a processor has no more local task to process. When this situation happens, a steal is initiated by the idle processor to obtain work from another (randomly chosen) processor. Thus, a local scheduler operates a local partition of the list of ready tasks. a processor accesses the partition belonging to another processor only when it's own partition becomes empty.
  
-Probably one of most know work steal implementation is provided by Cilk. The local lists are implemented with a double ended queue ({\em deque}). The local scheduler accesses the {\em bottom} of the queue to insert and remove tasks. In a steal, the thief accesses the {\em top}. This strategy allows to attain remarkable performance indexes when associated to an efficient heuristic to detect the critical path (that is, the long chain of dependencies of tasks \cite{Graham}) of the running program. In Cilk the critical path can be inferred since its API limits writing parallel programs in a nested fork-join style. In such way, closer a task is from the top, more amount of work (new tasks) it Isabel to create. A steal in this case potentialize the success of steal, providing a task which will makes grow the thief deque, while exploit at local scheduler the locality of tasks limiting synchronization among processors.
+Probably one of most know work steal implementation is provided by Cilk. The local lists are implemented with a double ended queue ({\em deque}). The local scheduler accesses the {\em bottom} of the queue to insert and remove tasks. In a steal, the thief accesses the {\em top} of a remote partition. This strategy allows to attain remarkable performance indexes when associated to an efficient heuristic to detect the critical path (that is, the long chain of dependencies of tasks \cite{Graham}) of the running program. In Cilk the critical path can be inferred since its API limits writing parallel programs in a nested fork-join style. In such way, closer a task is from the top of a partition, more amount of work (new tasks) it is able to create. A steal in this case potentialize the success of steal, providing a task which will makes grow the thief deque, while exploit at local scheduler the locality of tasks limiting synchronization among processors.
+
+\subsection{Task stealing}
+cicero 2 paragrafos
+
+\subsection{Private queues}
+Gerson
+
+\subsection{Distributed list}
+Gerson
 
 %-------------------------------------------------------------
 \section{Athread}\label{sec:athread}
